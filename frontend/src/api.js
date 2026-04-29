@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/leads";
+const API = "https://lead-management-system-b6q6.onrender.com/";
 
 export const getLeads = () => axios.get(API);
 export const addLead = (data) => axios.post(API, data);
