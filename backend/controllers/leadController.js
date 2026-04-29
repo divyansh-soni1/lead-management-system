@@ -61,3 +61,35 @@ exports.updateLead = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+
+exports.getLeads = async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM leads ORDER BY created_at DESC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+exports.deleteLead = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const check = await pool.query("SELECT * FROM leads WHERE id=$1", [id]);
+    if (check.rows.length === 0) {
+      return res.status(404).json({ error: "Lead not found" });
+    }
+
+    await pool.query("DELETE FROM leads WHERE id=$1", [id]);
+
+    res.json({ message: "Deleted successfully" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
