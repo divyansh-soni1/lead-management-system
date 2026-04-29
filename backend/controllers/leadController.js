@@ -1,3 +1,5 @@
+const pool = require("../db");
+
 exports.addLead = async (req, res) => {
   try {
     const { name, phone, source } = req.body;
