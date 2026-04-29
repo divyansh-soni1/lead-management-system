@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://lead-management-system-b6q6.onrender.com/";
+const API = "https://lead-management-system-b6q6.onrender.com/api/Leads";
 
 export const getLeads = () => axios.get(API);
 export const addLead = (data) => axios.post(API, data);
